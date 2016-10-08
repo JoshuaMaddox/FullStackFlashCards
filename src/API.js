@@ -45,6 +45,19 @@ const API = {
       .catch(err => {
         console.log(err)
       })
+  },
+
+  sendCategory(category) {
+    get(`http://localhost:8000/test`, {
+      params: { category }
+    })
+      .then(res => {
+        let { data } = res
+        console.log(data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 }
 

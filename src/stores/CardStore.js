@@ -33,7 +33,7 @@ class CardStore extends EventEmitter {
   }
 
   stopListening(cb){
-    this.on('CHANGE', cb)
+    this.removeListener('CHANGE', cb)
   }
 
   getAllCards(){

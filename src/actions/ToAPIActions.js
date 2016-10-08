@@ -14,8 +14,12 @@ const ToAPIActions = {
   },
 
   getAllCards(){
-    console.log('cards request sent')
     API.getCards()
+  },
+
+  selectCategory(category){
+    console.log('I am category in ToAPIActions', category)
+    API.sendCategory(category)
   }
 }
 export default ToAPIActions

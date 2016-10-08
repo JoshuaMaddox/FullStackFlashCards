@@ -13,6 +13,7 @@ export default class Categories extends Component {
       categories: CategoriesStore.getCategories()
     }
     this._onChange = this._onChange.bind(this)
+    this.addCategory = this.addCategory.bind(this)
   }
 
   componentDidMount(){
@@ -33,16 +34,24 @@ export default class Categories extends Component {
     })
   }
 
+  addCategory(e){
+    e.preventDefault()
+    console.log('e: ', e)
+    let category = e.target.value
+    document.getElementById(category).setAttribute('disabled', 'disabled');
+    console.log('I am target.id: ', typeof e.target.id)
+    ToAPIActions.selectCategory(category)
+  }
+
   render() {
     const { categories } = this.state
     let revealCats;
 
     if(categories) {
-       revealCats = categories.map((card, index) => {
-        let { id, category } = card
+       revealCats = categories.map((cat, index) => {
         return (
-          <div className="col-md-3" key={id}>
-            <button className='btn btn-success' ref={category} id={id}>{category}</button>
+          <div className="col-md-3" key={index}>
+            <button onClick={this.addCategory} className='btn btn-success categories' value={cat} id={cat}>{cat}</button>
           </div>
         )
       })

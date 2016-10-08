@@ -96,7 +96,6 @@ app.delete('/cards/:id', (req, res) => {
 
 //Get All Categories
 app.get('/categories', (req, res) => {
-  console.log('In the APP before calling getAllCats(): ')
   Flashies.getAllCats( (err, categories) => {
     if(err) return res.status(404).send(err)
     res.send(categories)

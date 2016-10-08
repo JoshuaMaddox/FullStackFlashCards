@@ -18,6 +18,19 @@ exports.getCards = function(cb){
   })
 }
 
+//Get all Flashcards in a Readable Format
+exports.getTestDeck = function(cb){
+  fs.readFile(testDataBase, (err, buffer) => {
+    if(err) return cb(err)
+      try{
+        var testDeck = JSON.parse(buffer)
+      } catch(e) {
+        var testDeck = []
+      }
+      cb(null, testDeck)
+  })
+}
+
 //Write whatever is fed in to JSON
 exports.write = function(newData, cb) {
   let json = JSON.stringify(newData)
@@ -37,20 +50,22 @@ exports.create = function(newCard, cb) {
 
 exports.getCat = function(category, cb) {
   exports.getCards((err, cards) => {
-    let catCards = []
-    if(err) return cb(err) 
-    cards.forEach((card) => {
-      if(category.includes(card.category) || card.category === category){
-       catCards.push(card)
+    exports.getTestDeck((err, testDeck) => {
+      let catCards = testDeck.testDeck
+      if(err) return cb(err) 
+      cards.forEach((card) => {
+        if(category.includes(card.category) || card.category === category){
+         catCards.push(card)
+        }
+      })
+      cb(null, catCards)
+      testDeck = {
+        testDeck: _.shuffle(catCards),
+        next: false
       }
+      testDeck = JSON.stringify(testDeck)
+      fs.writeFile(testDataBase, testDeck)
     })
-    cb(null, catCards)
-    testObj = {
-      testDeck: _.shuffle(catCards),
-      next: false
-    }
-    testDeck = JSON.stringify(testObj)
-    fs.writeFile(testDataBase, testDeck)
   })
 }
 
@@ -77,16 +92,16 @@ exports.editCard = function(newCard, cb) {
 exports.getAllCats = function(cb) {
   exports.getCards((err, cards) => {
     let categories = []
-    let eachCard = {}
+    let eachCat = {}
     if(err) return cb(err)
-    console.log('Made it to Flashies forEach') 
     cards.forEach((card) => {
-      eachCard = {
-        id: card.id,
-        category: card.category
-      }
-      categories.push(eachCard)
+      let cate = card.category
+      if(!eachCat[cate]){
+        eachCat[cate] = cate
+      }   
     })
+    categories = Object.keys(eachCat)
+    console.log('categories', categories)
     cb(null, categories)
   })
 }
