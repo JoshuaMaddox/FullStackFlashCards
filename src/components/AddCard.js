@@ -36,8 +36,9 @@ export default class AddCard extends Component {
     console.log('postCard Called: ')
     e.preventDefault()
     const {category, question, answer } = this.refs
+    let thisCat = category.value
     let cardObj = {
-      category: category.value,
+      category: thisCat.toUpperCase(),
       question: question.value,
       answer: answer.value
     }

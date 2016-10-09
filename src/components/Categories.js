@@ -51,7 +51,7 @@ export default class Categories extends Component {
        revealCats = categories.map((cat, index) => {
         return (
           <div className="col-md-3" key={index}>
-            <button onClick={this.addCategory} className='btn btn-success categories' value={cat} id={cat}>{cat}</button>
+            <button onClick={this.addCategory} className='categoriesBtns' value={cat} id={cat}>{cat}</button>
           </div>
         )
       })
@@ -60,11 +60,15 @@ export default class Categories extends Component {
     }
     return (
       <div>
-        <div>
-          <h3>Click the categories below to add them to your test then click on the start test button</h3>
-          <Link to='/test' className="btn btn-danger">Take Test</Link>
+        <div className='categoriesBanner'>
+          <div className="bannerHeader">
+            <h4>Click the categories below to add them to your test then click on the start test button</h4>
+          </div>
+          <Link to='/test' className="takeTestBtn">Take Test</Link>
         </div>
-        {revealCats}
+        <div className="categoryBtns">
+          {revealCats}
+        </div>
       </div>
     )
   }
