@@ -1,4 +1,5 @@
-import { get, post, put, delete } from 'axios'
+import axios from 'axios'
+import { get, post, put, } from 'axios'
 import ServerActions from './actions/ServerActions'
 import { browserHistory } from 'react-router'
 
@@ -19,6 +20,19 @@ const API = {
         let { data } = res
         let success = data.success
         ServerActions.cardAdded(success)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },
+
+  sendEdit(cardObj){
+    put(`http://localhost:8000/cards/${cardObj.id}`, cardObj)
+      .then(res => {
+        let { data } = res
+        let success = data.success
+        ServerActions.cardEdited(success)
+        browserHistory.push('/card')
       })
       .catch(err => {
         console.log(err)
@@ -58,7 +72,29 @@ const API = {
       .catch(err => {
         console.log(err)
       })
+  },
+
+  deleteCard(id){
+    axios.delete(`http://localhost:8000/cards/${id}`)
+      .then(res => {
+        this.getCards()
+        console.log('delete successful', res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },
+
+  nextTest(){
+    get(`http://localhost:8000/test`)
+      .then(res => {
+        let { data } = res
+        console.log('I am test data', data)
+        ServerActions.receiveNext(data)
+      })
+      .catch(console.error)
   }
+
 }
 
 export default API

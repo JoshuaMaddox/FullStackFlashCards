@@ -29,12 +29,6 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler))
 
 
-// app.get('/test', (req, res) => {
-//   res.send('Hiya buddy')
-// })
-
-//_________________________
-
 //Get's a list of ALL the cards
 app.get('/cards', (req, res) => {
   Flashies.getCards((err, cards) => {
@@ -82,7 +76,7 @@ app.put('/cards/:id', (req, res) => {
   Flashies.editCard(newCard, (err) => {
     if(err) return res.status(404).send(err)
   })
-  res.send(`Your card ID: ${newCard.id} has been updated`)
+  res.send({success: true})
 })
 
 //Delete card by id
@@ -102,7 +96,10 @@ app.get('/categories', (req, res) => {
   })
 })
 
-//-------------------------
+//Give index.html on each request
+app.use("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "./build/index.html"));
+});
 
 app.listen(PORT, err => {
   console.log( err || `Express listening on port ${8000}`)

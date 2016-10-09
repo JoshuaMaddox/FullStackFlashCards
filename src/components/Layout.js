@@ -8,13 +8,14 @@ export default class Layout extends Component {
     super();
   }
 
+
   render() {
     return (
-      <div>
+      <div className="mainContaienr">
         <div className="row">
           <Link to='/card' className="btn btn-primary">See All Cards</Link> 
           <Link to='/card/new' className="btn btn-danger">Add Cards</Link>
-          <Link to='/card/categories' className="btn btn-danger">Select Categories</Link>
+          <Link to='/card/categories' className="btn btn-danger">Create A Test</Link>
         </div>
         {this.props.children}
       </div>

@@ -3,6 +3,8 @@ import AppDispatcher from '../AppDispatcher'
 
 let _allCards = []
 let _cardAdded = false
+let _editConfirmation = false
+let _cardToEdit = {}
 
 class CardStore extends EventEmitter {
   constructor(){
@@ -21,7 +23,15 @@ class CardStore extends EventEmitter {
           break;
         case 'ADD_ANOTHER':
           _cardAdded = false
-          console.log('success: ', _cardAdded)
+          this.emit('CHANGE')
+          break;
+        case 'CARD_TO_EDIT':
+          _cardToEdit = action.payload.editCardOBj
+          this.emit('CHANGE')
+          break;
+        case 'CARD_EDITED':
+          _editConfirmation = action.payload.success
+          console.log('I am editConfirmation', _editConfirmation)
           this.emit('CHANGE')
           break;
       }
@@ -42,6 +52,14 @@ class CardStore extends EventEmitter {
 
   getCardAdded(){
     return _cardAdded
+  }
+
+  getCardToEdit(){
+    return _cardToEdit
+  }
+
+  editConfirmation(){
+    return _editConfirmation
   }
 }
 

@@ -18,8 +18,19 @@ const ToAPIActions = {
   },
 
   selectCategory(category){
-    console.log('I am category in ToAPIActions', category)
     API.sendCategory(category)
+  },
+
+  deleteCard(id){
+    API.deleteCard(id)
+  },
+
+  nextTest(){
+    API.nextTest()
+  },
+
+  sendEdit(cardObj){
+    API.sendEdit(cardObj)
   }
 }
 export default ToAPIActions

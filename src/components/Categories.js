@@ -60,7 +60,10 @@ export default class Categories extends Component {
     }
     return (
       <div>
-        <h3>Add categories to your test deck by clicking on the available categories below</h3>
+        <div>
+          <h3>Click the categories below to add them to your test then click on the start test button</h3>
+          <Link to='/test' className="btn btn-danger">Take Test</Link>
+        </div>
         {revealCats}
       </div>
     )

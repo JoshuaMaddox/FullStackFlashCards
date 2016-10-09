@@ -26,6 +26,27 @@ const ServerActions = {
       type: 'CATS_RECEIVED',
       payload: { categories }
     })
+  },
+
+  receiveNext(next){
+    AppDispatcher.dispatch({
+      type: 'NEXT_RECEIVED',
+      payload: { next }
+    })
+  },
+
+  cardToEdit(editCardOBj){
+    AppDispatcher.dispatch({
+      type: 'CARD_TO_EDIT',
+      payload: { editCardOBj }
+    })
+  },
+
+  cardEdited(success){
+    AppDispatcher.dispatch({
+      type: 'CARD_EDITED',
+      payload: { success }
+    })
   }
 
 }
