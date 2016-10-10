@@ -36,10 +36,8 @@ export default class Categories extends Component {
 
   addCategory(e){
     e.preventDefault()
-    console.log('e: ', e)
     let category = e.target.value
     document.getElementById(category).setAttribute('disabled', 'disabled');
-    console.log('I am target.id: ', typeof e.target.id)
     ToAPIActions.selectCategory(category)
   }
 

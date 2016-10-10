@@ -10,7 +10,6 @@ class TestStore extends EventEmitter {
     AppDispatcher.register(action => {
       switch(action.type) {
         case 'NEXT_RECEIVED':
-          console.log('next received', action.payload.next)
           _next = action.payload.next
           this.emit('CHANGE')
           break;

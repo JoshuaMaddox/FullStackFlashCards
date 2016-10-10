@@ -33,7 +33,6 @@ export default class AddCard extends Component {
   }
 
   postCard(e){
-    console.log('postCard Called: ')
     e.preventDefault()
     const {category, question, answer } = this.refs
     let thisCat = category.value
@@ -54,11 +53,8 @@ export default class AddCard extends Component {
   }
 
   render() {
-
     const { cardAddSucceded } = this.state
-    console.log( cardAddSucceded )
     let showAddMore;
-
 
     if(cardAddSucceded){
       showAddMore = (

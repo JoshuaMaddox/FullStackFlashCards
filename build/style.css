@@ -185,6 +185,26 @@ input:-ms-input-placeholder {
   text-transform: uppercase;
 }
 
+.ratingBtns {
+  padding: 10px 10px 10px 10px ;
+  color: white;
+  background-color: #2ecc71;
+  border: none;
+  font: 300 10px 'Lato', sans-serif;
+  text-transform: uppercase;
+  margin: 5px;
+}
+
+.ratingBtns:hover {
+  background-color: #c0392b;
+  transition: .5s;
+}
+
+.ratingTag {
+  margin-top: 12px;
+  font-size: 13px;
+}
+
 .takeTestBtn:hover {
   background-color: #34495e;
   transition: .5s;
@@ -333,8 +353,6 @@ input:-ms-input-placeholder {
   margin-top: 15px;
   transition: .5s;
 }
-
-
 
 .headerImg{
   display: block;

@@ -39,7 +39,6 @@ exports.write = function(newData, cb) {
 
 //Create a new flashcard
 exports.create = function(newCard, cb) {
-  console.log('in create', newCard)
   exports.getCards((err, cards) => {
     if(err) return cb(err)
     newCard.id = uuid()
@@ -101,7 +100,6 @@ exports.getAllCats = function(cb) {
       }   
     })
     categories = Object.keys(eachCat)
-    console.log('categories', categories)
     cb(null, categories)
   })
 }

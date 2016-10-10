@@ -18,7 +18,6 @@ class CardStore extends EventEmitter {
           break;
         case 'CARD_ADDED':
           _cardAdded = action.payload.success
-          console.log('success: ', _cardAdded)
           this.emit('CHANGE')
           break;
         case 'ADD_ANOTHER':
@@ -31,7 +30,6 @@ class CardStore extends EventEmitter {
           break;
         case 'CARD_EDITED':
           _editConfirmation = action.payload.success
-          console.log('I am editConfirmation', _editConfirmation)
           this.emit('CHANGE')
           break;
       }

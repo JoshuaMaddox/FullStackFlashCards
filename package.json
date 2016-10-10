@@ -25,6 +25,7 @@
     "react-addons-pure-render-mixin": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-easy-transition": "0.0.5",
+    "react-joyride": "^1.5.0",
     "react-router": "^2.8.1",
     "uuid": "^2.0.3",
     "webpack": "^1.13.2",

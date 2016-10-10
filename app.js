@@ -28,7 +28,6 @@ app.use(webpackDevMiddleware(compiler, {
 }))
 app.use(webpackHotMiddleware(compiler))
 
-
 //Get's a list of ALL the cards
 app.get('/cards', (req, res) => {
   Flashies.getCards((err, cards) => {
@@ -37,6 +36,14 @@ app.get('/cards', (req, res) => {
     }
     res.send(cards)
   })
+})
+
+//Store a card by difficulty
+app.put('/test/difficulty', (req, res) => {
+  Test.setDifficulty(req.body, (err) => {
+    if (err) return res.status(404).send(err)
+  })
+  res.send({success: true})
 })
 
 //Get questions by category
@@ -61,7 +68,6 @@ app.get('/test', (req, res) => {
 
 //Create a flashcard with Category, Question, Answer
 app.post('/cards', (req, res) => {
-  console.log('in the post', req.body)
   Flashies.create(req.body, err => {
     if(err) return res.status(400).send(err);
     res.send({success: true});
@@ -95,6 +101,18 @@ app.get('/categories', (req, res) => {
     res.send(categories)
   })
 })
+
+app.put('/cards/:id', (req, res) => {
+  let id = req.params.id
+  const { category, question, answer } = req.body
+  const newCard = { category, question, answer, id }
+  Flashies.editCard(newCard, (err) => {
+    if(err) return res.status(404).send(err)
+  })
+  res.send({success: true})
+})
+
+
 
 //Give index.html on each request
 app.use("*", function(req, res) {

@@ -31,6 +31,10 @@ const ToAPIActions = {
 
   sendEdit(cardObj){
     API.sendEdit(cardObj)
+  },
+
+  sendDiff(cardDifficulty){
+    API.sendDiff(cardDifficulty)
   }
 }
 export default ToAPIActions

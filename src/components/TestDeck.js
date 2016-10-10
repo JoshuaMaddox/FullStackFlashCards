@@ -5,6 +5,7 @@ import TestStore from '../stores/TestStore'
 // import {browserHistory} from "react-router";
 import { Link } from "react-router"
 import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup'
+import DifficultyRating from './DifficultyRating'
 
 export default class TestDeck extends Component {
 
@@ -16,6 +17,7 @@ export default class TestDeck extends Component {
     }
     this._onChange = this._onChange.bind(this)
     this.nextAction = this.nextAction.bind(this)
+    this.setDifficulty = this.setDifficulty.bind(this)
   }
 
   componentWillMount() {
@@ -47,11 +49,23 @@ export default class TestDeck extends Component {
     }
   }
 
+  setDifficulty(e){
+    e.preventDefault()
+    let cardDiff = e.target.id
+    let elmObj = document.getElementById(e.target.id)
+    let cardID = elmObj.dataset.id
+    let cardDifficulty = {
+      id: cardID,
+      difficulty: cardDiff
+    }
+    ToAPIActions.sendDiff(cardDifficulty)
+    this.nextAction(e)
+  }
+
   render() {
     const { testNext, question } = this.state
-    const { testEnd, res } = testNext
-    console.log('testEnd: ', testEnd)
-    console.log('res: ', res)
+    const { testEnd, res, testID } = testNext
+    
     let revealNext;
     let isQuestion = (
       <div className="testCardContainer">
@@ -61,7 +75,7 @@ export default class TestDeck extends Component {
         </div>
       </div>
       )
-    
+
     let isAnswer = (
       <ReactCSSTransitionGroup 
         transitionName="example" 
@@ -73,6 +87,12 @@ export default class TestDeck extends Component {
             <div className="testCardAnswer">
               <h4>{res}</h4>
               <button className="takeTestBtn" onClick={this.nextAction}>See Next Question</button>
+              <div className="ratingBtnsContainer">
+                <p className='ratingTag'>Add a difficulty ranking to add this card to your review deck</p>
+                <button className="ratingBtns" id='hard' data-id={testID} onClick={this.setDifficulty}>Hard</button>
+                <button className="ratingBtns" id='medium' data-id={testID} onClick={this.setDifficulty}>Medium</button>
+                <button className="ratingBtns" id='easy' data-id={testID} onClick={this.setDifficulty}>Easy</button>
+              </div>
             </div>
           </div>
       </ReactCSSTransitionGroup> 
@@ -101,7 +121,6 @@ export default class TestDeck extends Component {
     }
 
     return (
-      
       <div>
         {revealNext}
       </div> 

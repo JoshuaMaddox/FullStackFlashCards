@@ -8,7 +8,6 @@ const API = {
     get(`http://localhost:8000/test`)
       .then(res => {
         let { data } = res
-        console.log('data: ', data)
         ServerActions.receiveFlashCards(data)
       })
       .catch(console.error)
@@ -67,7 +66,6 @@ const API = {
     })
       .then(res => {
         let { data } = res
-        console.log(data)
       })
       .catch(err => {
         console.log(err)
@@ -89,10 +87,19 @@ const API = {
     get(`http://localhost:8000/test`)
       .then(res => {
         let { data } = res
-        console.log('I am test data', data)
         ServerActions.receiveNext(data)
       })
       .catch(console.error)
+  },
+
+  sendDiff(cardDifficulty){
+     put(`http://localhost:8000/test/difficulty`, cardDifficulty)
+      .then(res => {
+        return
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
 }

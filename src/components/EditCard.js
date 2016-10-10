@@ -36,9 +36,10 @@ export default class AddCard extends Component {
   sendEdit(e){
     e.preventDefault()
     const {category, question, answer, id } = this.refs
+    let cat = category.value
     let cardObj = {
       id: id.value,
-      category: category.value,
+      category: cat.toUpperCase(),
       question: question.value,
       answer: answer.value
     }
@@ -48,7 +49,6 @@ export default class AddCard extends Component {
   render() {
 
     const { cardToEdit } = this.state
-    console.log( cardToEdit)
     const { id, category, question, answer } = cardToEdit
 
     return (
